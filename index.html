@@ -11,6 +11,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            height: 100vh;
+            margin: 0;
         }
     </style>
 </head>
@@ -20,17 +22,19 @@
     </div>
       
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
       
     <script>
-        const ctx = document.getElementById('myChart');
-      
-        new Chart(ctx, {
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const chartData = [65, 59, 80, 81, 56, 30];
+
+        const myChart = new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: ['January', 'February', 'March', 'April', 'May', 'June'],
                 datasets: [{
                     label: 'Monthly Sales',
-                    data: [65, 59, 80, 81, 56, 30],
+                    data: chartData,
                     backgroundColor: ['red', 'blue', 'green', 'yellow', 'pink', 'orange'],
                     borderWidth: 2,
                 }]
@@ -54,12 +58,22 @@
                         beginAtZero: true
                     }
                 },
-                animation: {
-                    duration: 2000, 
-                    easing: 'easeInOutBounce' 
-                }
             }
         });
+
+        anime({
+            targets: chartData,
+            easing: 'linear',
+            duration: 2000,
+            loop: true,
+            direction: 'alternate',
+            round: 1,
+            delay: anime.stagger(500, { start: 500 }),
+            update: function () {
+                myChart.update();
+            }
+        });
+
     </script>
 </body>
 </html>
