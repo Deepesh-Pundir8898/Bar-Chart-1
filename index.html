@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Chart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: aquamarine;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <canvas id="myChart" width="700px" height="500px"></canvas>
+    </div>
+      
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      
+    <script>
+        const ctx = document.getElementById('myChart');
+      
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                datasets: [{
+                    label: 'Monthly Sales',
+                    data: [65, 59, 80, 81, 56, 30],
+                    backgroundColor: ['red', 'blue', 'green', 'yellow', 'pink', 'orange'],
+                    borderWidth: 2,
+                }]
+            },
+            options: {
+                responsive: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Monthly Sales Data',
+                        font: {
+                            size: 30 
+                        }
+                    }
+                },
+                layout: {
+                    padding: 50,
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                animation: {
+                    duration: 2000, 
+                    easing: 'easeInOutBounce' 
+                }
+            }
+        });
+    </script>
+</body>
+</html>
